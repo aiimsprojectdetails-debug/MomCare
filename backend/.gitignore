@@ -1,15 +1,19 @@
-# Environment variables
+# Python
+__pycache__/
+*.py[cod]
+
+# Environment
 .env
 
-# Python cache
-__pycache__/
-**/__pycache__/
-*.pyc
+# Flask
+instance/
 
-# Log files
+# Logs
 *.log
 server.log
 
-# Virtual environments
-venv/
-.env/
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
