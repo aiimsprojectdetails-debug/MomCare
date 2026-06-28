@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mom's Care - Patient Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-wrapper">
+    <!-- Left Navigation Sidebar -->
+    <div class="sidebar">
+        <div>
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <div class="logo-text">Mom's<span> Care</span></div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li>
+                    <a href="dashboard.html" class="nav-item">
+                        <i class="fa-solid fa-chart-simple"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="patient.html?all=true" class="nav-item active">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Patients</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="hospital.html" class="nav-item">
+                        <i class="fa-solid fa-hospital"></i>
+                        <span>Hospitals</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="report.html" class="nav-item">
+                        <i class="fa-solid fa-file-invoice"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="user-profile-widget">
+                <div class="user-widget-avatar" id="userAvatar">
+                    DP
+                </div>
+                <div class="user-widget-info">
+                    <div class="user-widget-name" id="userNameWidget">Dr. Ananya Sharma</div>
+                    <div class="user-widget-role" id="userRoleWidget">Obstetrician</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <!-- Header Bar -->
+        <div class="header-bar fade-in-up">
+            <div class="header-left" style="display: flex; align-items: center; gap: 16px;">
+                <a href="patient.html" class="btn btn-secondary-custom" style="padding: 8px 14px;">
+                    <i class="fa-solid fa-arrow-left"></i> Back
+                </a>
+                <h1 style="margin: 0;">Patient Records</h1>
+            </div>
+            <div class="header-right">
+                <span class="badge bg-light text-muted border px-3 py-2 fw-semibold" id="lastUpdatedLabel">Last updated: Today</span>
+            </div>
+        </div>
+
+        <!-- Two Column Profile Layout -->
+        <div class="row fade-in-up">
+            <!-- Left Profile overview card / subnavigation -->
+            <div class="col-lg-4 mb-4">
+                <div class="profile-card text-center mb-4">
+                    <div class="profile-avatar-big" id="patientAvatarBig">
+                        ?
+                    </div>
+                    <h4 class="fw-bold text-slate-900 mb-1" id="patientNameTitle">Select Patient</h4>
+                    <p class="small text-muted mb-3" id="patientAadhaarTitle"><i class="fa-solid fa-id-card me-2"></i>Aadhaar: N/A</p>
+                    
+                    <span class="badge-custom badge-normal mb-4" id="patientRiskBadge">Not Loaded</span>
+                    
+                    <hr class="my-3" style="border-color: var(--slate-200);">
+
+                    <div class="text-start d-flex flex-column gap-2 mt-3">
+                        <a href="profile.html" class="nav-link nav-item active" style="padding: 12px 18px; border-radius: var(--border-radius-md); transform: none;">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <span>Basic Information</span>
+                        </a>
+                        <a href="trimmester.html?trim=1" class="nav-link nav-item" style="padding: 12px 18px; border-radius: var(--border-radius-md); transform: none;">
+                            <i class="fa-solid fa-1"></i>
+                            <span>1st Trimester Monitoring</span>
+                        </a>
+                        <a href="trimmester.html?trim=2" class="nav-link nav-item" style="padding: 12px 18px; border-radius: var(--border-radius-md); transform: none;">
+                            <i class="fa-solid fa-2"></i>
+                            <span>2nd Trimester Monitoring</span>
+                        </a>
+                        <a href="trimmester.html?trim=3" class="nav-link nav-item" style="padding: 12px 18px; border-radius: var(--border-radius-md); transform: none;">
+                            <i class="fa-solid fa-3"></i>
+                            <span>3rd Trimester Monitoring</span>
+                        </a>
+                        <a href="delivery.html" class="nav-link nav-item" style="padding: 12px 18px; border-radius: var(--border-radius-md); transform: none;">
+                            <i class="fa-solid fa-baby"></i>
+                            <span>Delivery Outcome</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Profile detailed edit form -->
+            <div class="col-lg-8">
+                <div class="card p-4">
+                    <h3 class="fw-bold text-slate-900 mb-4" style="font-size: 20px;"><i class="fa-solid fa-file-invoice me-2" style="color: var(--primary);"></i>Patient Information</h3>
+                    
+                    <form id="profileForm">
+                        <!-- A. IDENTIFICATION -->
+                        <h6 style="color: var(--primary); font-size: 13px; font-weight: 700; margin-bottom: 12px;"><i class="fa-solid fa-user-tag me-1"></i>A. IDENTIFICATION</h6>
+                        <div class="row">
+                            <div class="col-md-6 mb-3"><label class="form-label" style="font-size: 12px;">Aadhaar No. (Read-only)</label><input type="text" class="form-control" id="editAadhaar" readonly style="font-size: 12px; background-color: var(--slate-100);"></div>
+                            <div class="col-md-6 mb-3"><label class="form-label" style="font-size: 12px;">Registration Date</label><input type="date" class="form-control" id="editRegistrationDate" style="font-size: 12px;"></div>
+                            <div class="col-md-6 mb-3"><label class="form-label" style="font-size: 12px;">Name *</label><input type="text" class="form-control" id="editName" required style="font-size: 12px;"></div>
+                            <div class="col-md-6 mb-3"><label class="form-label" style="font-size: 12px;">Age (years) *</label><input type="number" class="form-control" id="editAge" required style="font-size: 12px;"></div>
+                            <div class="col-md-6 mb-3"><label class="form-label" style="font-size: 12px;">Mobile Number *</label><input type="tel" class="form-control" id="editMobile" required style="font-size: 12px;"></div>
+                            <div class="col-md-6 mb-3"><label class="form-label" style="font-size: 12px;">Village/Address *</label><input type="text" class="form-control" id="editAddress" required style="font-size: 12px;"></div>
+                        </div>
+
+                        <hr style="border-color: var(--slate-200); margin: 20px 0;">
+
+                        <!-- B. SOCIO-DEMOGRAPHIC -->
+                        <h6 style="color: var(--primary); font-size: 13px; font-weight: 700; margin-bottom: 12px;"><i class="fa-solid fa-chart-pie me-1"></i>B. SOCIO-DEMOGRAPHIC INFORMATION</h6>
+                        <div class="row">
+                            <div class="col-md-4 mb-3"><label class="form-label" style="font-size: 12px;">Education *</label><select class="form-select" id="editEducation" required style="font-size: 12px;"><option>-</option><option>Illiterate</option><option>Primary</option><option>Secondary</option><option>Higher Secondary</option><option>Graduate</option></select></div>
+                            <div class="col-md-4 mb-3"><label class="form-label" style="font-size: 12px;">Occupation *</label><select class="form-select" id="editOccupation" required style="font-size: 12px;"><option>-</option><option>Housewife</option><option>Agriculture</option><option>Business</option><option>Service</option><option>Other</option></select></div>
+                            <div class="col-md-4 mb-3"><label class="form-label" style="font-size: 12px;">Family Type *</label><select class="form-select" id="editFamilyType" required style="font-size: 12px;"><option>-</option><option>Nuclear</option><option>Joint</option></select></div>
+                        </div>
+
+                        <hr style="border-color: var(--slate-200); margin: 20px 0;">
+
+                        <!-- C. OBSTETRIC HISTORY -->
+                        <h6 style="color: var(--primary); font-size: 13px; font-weight: 700; margin-bottom: 12px;"><i class="fa-solid fa-hospital-user me-1"></i>C. OBSTETRIC HISTORY</h6>
+                        <div class="row">
+                            <div class="col-md-2 mb-3"><label class="form-label" style="font-size: 12px;">Gravida *</label><input type="number" class="form-control" id="editGravida" required style="font-size: 12px;"></div>
+                            <div class="col-md-2 mb-3"><label class="form-label" style="font-size: 12px;">Para *</label><input type="number" class="form-control" id="editPara" required style="font-size: 12px;"></div>
+                            <div class="col-md-2 mb-3"><label class="form-label" style="font-size: 12px;">Abortions</label><input type="number" class="form-control" id="editAbortions" style="font-size: 12px;"></div>
+                            <div class="col-md-2 mb-3"><label class="form-label" style="font-size: 12px;">Stillbirth</label><input type="number" class="form-control" id="editStillbirth" style="font-size: 12px;"></div>
+                            <div class="col-md-2 mb-3"><label class="form-label" style="font-size: 12px;">Preterm Birth</label><input type="number" class="form-control" id="editPreterm" style="font-size: 12px;"></div>
+                            <div class="col-md-2 mb-3"><label class="form-label" style="font-size: 12px;">Cesarean</label><input type="number" class="form-control" id="editCesarean" style="font-size: 12px;"></div>
+                        </div>
+
+                        <hr style="border-color: var(--slate-200); margin: 20px 0;">
+
+                        <!-- D. MEDICAL HISTORY -->
+                        <h6 style="color: var(--primary); font-size: 13px; font-weight: 700; margin-bottom: 12px;"><i class="fa-solid fa-heart-pulse me-1"></i>D. MEDICAL HISTORY</h6>
+                        <div class="row">
+                            <div class="col-md-3 mb-3"><label class="form-label" style="font-size: 12px;">Hypertension *</label><select class="form-select" id="editHypertension" required style="font-size: 12px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                            <div class="col-md-3 mb-3"><label class="form-label" style="font-size: 12px;">Diabetes *</label><select class="form-select" id="editDiabetes" required style="font-size: 12px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                            <div class="col-md-3 mb-3"><label class="form-label" style="font-size: 12px;">Thyroid Disorder *</label><select class="form-select" id="editThyroid" required style="font-size: 12px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                            <div class="col-md-3 mb-3"><label class="form-label" style="font-size: 12px;">Anemia History *</label><select class="form-select" id="editAnemia" required style="font-size: 12px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 mb-3"><label class="form-label" style="font-size: 12px;">Other Chronic Disease</label><input type="text" class="form-control" id="editChronic" placeholder="Specify if any" style="font-size: 12px;"></div>
+                        </div>
+
+                        <hr style="border-color: var(--slate-200); margin: 20px 0;">
+
+                        <!-- E. CURRENT PREGNANCY -->
+                        <h6 style="color: var(--primary); font-size: 13px; font-weight: 700; margin-bottom: 12px;"><i class="fa-solid fa-utensils me-1"></i>E. CURRENT PREGNANCY</h6>
+                        <div class="row">
+                            <div class="col-md-3 mb-3"><label class="form-label" style="font-size: 12px;">LMP *</label><input type="date" class="form-control" id="editLmp" required style="font-size: 12px;"></div>
+                            <div class="col-md-3 mb-3"><label class="form-label" style="font-size: 12px;">EDD *</label><input type="date" class="form-control" id="editEdd" required style="font-size: 12px;"></div>
+                            <div class="col-md-3 mb-3"><label class="form-label" style="font-size: 12px;">Gestational Age (weeks)</label><input type="number" class="form-control" id="editGestAge" style="font-size: 12px;"></div>
+                            <div class="col-md-3 mb-3"><label class="form-label" style="font-size: 12px;">Pregnancy Type *</label><select class="form-select" id="editPregnancyType" required style="font-size: 12px;"><option>-</option><option>Singleton</option><option>Twin</option><option>Multiple</option></select></div>
+                        </div>
+
+                        <hr style="border-color: var(--slate-200); margin: 20px 0;">
+
+                        <!-- F. BASELINE ANTHROPOMETRY -->
+                        <h6 style="color: var(--primary); font-size: 13px; font-weight: 700; margin-bottom: 12px;"><i class="fa-solid fa-ruler me-1"></i>F. BASELINE ANTHROPOMETRY</h6>
+                        <div class="row">
+                            <div class="col-md-3 mb-3"><label class="form-label" style="font-size: 12px;">Height (cm) *</label><input type="number" class="form-control" id="editHeight" step="0.1" required style="font-size: 12px;"></div>
+                            <div class="col-md-3 mb-3"><label class="form-label" style="font-size: 12px;">Weight (kg) *</label><input type="number" class="form-control" id="editWeight" step="0.1" required style="font-size: 12px;"></div>
+                            <div class="col-md-3 mb-3"><label class="form-label" style="font-size: 12px;">BMI *</label><input type="number" class="form-control" id="editBmi" step="0.1" readonly style="font-size: 12px; background-color: var(--slate-100);"></div>
+                            <div class="col-md-3 mb-3"><label class="form-label" style="font-size: 12px;">MUAC (cm)</label><input type="number" class="form-control" id="editMuac" step="0.1" style="font-size: 12px;"></div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary-custom px-4 py-2 mt-3">
+                            <i class="fa-solid fa-floppy-disk"></i> Save Patient Information
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const API_BASE_URL = "http://localhost:5000/api/v1";
+
+// Load profile on page load
+document.addEventListener("DOMContentLoaded", async () => {
+    const userMobile = localStorage.getItem('userMobile');
+    if (userMobile) {
+        document.getElementById('userNameWidget').textContent = userMobile;
+        const initials = userMobile.substring(0, 2).toUpperCase();
+        document.getElementById('userAvatar').textContent = initials;
+    }
+
+    const patientId = localStorage.getItem('selectedPatientId');
+    if (patientId) {
+        await loadPatientProfile(patientId);
+    } else {
+        alert("No patient selected");
+    }
+
+    // Add BMI calculation
+    document.getElementById('editHeight').addEventListener('change', calculateBMI);
+    document.getElementById('editWeight').addEventListener('change', calculateBMI);
+});
+
+function calculateBMI() {
+    const height = parseFloat(document.getElementById('editHeight').value);
+    const weight = parseFloat(document.getElementById('editWeight').value);
+    
+    if (height && weight && height > 0) {
+        const heightInMeters = height / 100;
+        const bmi = weight / (heightInMeters * heightInMeters);
+        document.getElementById('editBmi').value = bmi.toFixed(1);
+    }
+}
+
+function getPatientValue(patient, ...keys) {
+    for (const key of keys) {
+        if (patient[key] !== undefined && patient[key] !== null && patient[key] !== '') {
+            return patient[key];
+        }
+    }
+    return '';
+}
+
+function toDateInput(value) {
+    return value ? String(value).slice(0, 10) : '';
+}
+
+function setSelectValue(id, value, fallback = '-') {
+    const select = document.getElementById(id);
+    const normalized = value || fallback;
+    if (![...select.options].some(option => option.value === normalized || option.textContent === normalized)) {
+        select.add(new Option(normalized, normalized));
+    }
+    select.value = normalized;
+}
+
+function setLoadedBadge(patient) {
+    const riskStatus = getPatientValue(patient, 'riskStatus', 'risk_status') || 'Normal';
+    const badge = document.getElementById('patientRiskBadge');
+    badge.textContent = riskStatus;
+    badge.className = `badge-custom mb-4 ${riskStatus.toLowerCase().includes('risk') ? 'badge-risk' : 'badge-normal'}`;
+}
+
+async function loadPatientProfile(patientId) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/patients/${patientId}`);
+        const data = await response.json();
+        
+        if (data.success) {
+            const patient = data.data || data.patient || {};
+            const patientName = getPatientValue(patient, 'name', 'patient_name', 'patientName') || localStorage.getItem('selectedPatientName') || 'Patient';
+            
+            // Populate titles
+            document.getElementById('patientNameTitle').textContent = patientName;
+            document.getElementById('patientAadhaarTitle').innerHTML = `<i class="fa-solid fa-id-card me-2"></i>Aadhaar: ${formatAadhaar(getPatientValue(patient, 'aadhaar') || localStorage.getItem('selectedPatientAadhaar'))}`;
+            document.getElementById('patientAvatarBig').textContent = patientName[0].toUpperCase();
+            setLoadedBadge(patient);
+            
+            // A. IDENTIFICATION
+            document.getElementById('editAadhaar').value = getPatientValue(patient, 'aadhaar') || localStorage.getItem('selectedPatientAadhaar') || '';
+            document.getElementById('editRegistrationDate').value = toDateInput(getPatientValue(patient, 'registrationDate', 'registration_date'));
+            document.getElementById('editName').value = patientName;
+            document.getElementById('editAge').value = getPatientValue(patient, 'age') || localStorage.getItem('selectedPatientAge') || '';
+            document.getElementById('editMobile').value = getPatientValue(patient, 'mobile', 'phone') || '';
+            document.getElementById('editAddress').value = getPatientValue(patient, 'address');
+
+            // B. SOCIO-DEMOGRAPHIC
+            setSelectValue('editEducation', getPatientValue(patient, 'education'));
+            setSelectValue('editOccupation', getPatientValue(patient, 'occupation'));
+            setSelectValue('editFamilyType', getPatientValue(patient, 'familyType', 'family_type'));
+
+            // C. OBSTETRIC HISTORY
+            document.getElementById('editGravida').value = getPatientValue(patient, 'gravida') || 0;
+            document.getElementById('editPara').value = getPatientValue(patient, 'para') || 0;
+            document.getElementById('editAbortions').value = getPatientValue(patient, 'abortions') || 0;
+            document.getElementById('editStillbirth').value = getPatientValue(patient, 'stillbirth') || 0;
+            document.getElementById('editPreterm').value = getPatientValue(patient, 'pretermBirth', 'preterm_birth') || 0;
+            document.getElementById('editCesarean').value = getPatientValue(patient, 'cesarean') || 0;
+
+            // D. MEDICAL HISTORY
+            setSelectValue('editHypertension', getPatientValue(patient, 'hypertension'));
+            setSelectValue('editDiabetes', getPatientValue(patient, 'diabetes'));
+            setSelectValue('editThyroid', getPatientValue(patient, 'thyroid'));
+            setSelectValue('editAnemia', getPatientValue(patient, 'anemia'));
+            document.getElementById('editChronic').value = getPatientValue(patient, 'otherDisease', 'other_disease', 'chronicDisease');
+
+            // E. CURRENT PREGNANCY
+            document.getElementById('editLmp').value = toDateInput(getPatientValue(patient, 'lmp'));
+            document.getElementById('editEdd').value = toDateInput(getPatientValue(patient, 'edd'));
+            document.getElementById('editGestAge').value = getPatientValue(patient, 'gestationalAge', 'gestational_age');
+            setSelectValue('editPregnancyType', getPatientValue(patient, 'pregnancyType', 'pregnancy_type'));
+
+            // F. BASELINE ANTHROPOMETRY
+            document.getElementById('editHeight').value = getPatientValue(patient, 'height');
+            document.getElementById('editWeight').value = getPatientValue(patient, 'weight');
+            document.getElementById('editBmi').value = getPatientValue(patient, 'bmi');
+            document.getElementById('editMuac').value = getPatientValue(patient, 'muac');
+        }
+    } catch(error) {
+        console.error(error);
+    }
+}
+
+function formatAadhaar(str) {
+    if (!str) return 'N/A';
+    return str.replace(/(\d{4})(\d{4})(\d{4})/, '$1 $2 $3');
+}
+
+// Form Submission Save
+document.getElementById('profileForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const patientId = localStorage.getItem('selectedPatientId');
+    if (!patientId) {
+        alert("No patient selected");
+        return;
+    }
+    
+    const patientData = {
+        // A. IDENTIFICATION
+        name: document.getElementById('editName').value,
+        age: parseInt(document.getElementById('editAge').value),
+        mobile: document.getElementById('editMobile').value,
+        address: document.getElementById('editAddress').value,
+        registrationDate: document.getElementById('editRegistrationDate').value,
+
+        // B. SOCIO-DEMOGRAPHIC
+        education: document.getElementById('editEducation').value,
+        occupation: document.getElementById('editOccupation').value,
+        familyType: document.getElementById('editFamilyType').value,
+
+        // C. OBSTETRIC HISTORY
+        gravida: parseInt(document.getElementById('editGravida').value),
+        para: parseInt(document.getElementById('editPara').value),
+        abortions: parseInt(document.getElementById('editAbortions').value) || 0,
+        stillbirth: parseInt(document.getElementById('editStillbirth').value) || 0,
+        pretermBirth: parseInt(document.getElementById('editPreterm').value) || 0,
+        cesarean: parseInt(document.getElementById('editCesarean').value) || 0,
+
+        // D. MEDICAL HISTORY
+        hypertension: document.getElementById('editHypertension').value,
+        diabetes: document.getElementById('editDiabetes').value,
+        thyroid: document.getElementById('editThyroid').value,
+        anemia: document.getElementById('editAnemia').value,
+        otherDisease: document.getElementById('editChronic').value,
+
+        // E. CURRENT PREGNANCY
+        lmp: document.getElementById('editLmp').value,
+        edd: document.getElementById('editEdd').value,
+        gestationalAge: parseInt(document.getElementById('editGestAge').value) || 0,
+        pregnancyType: document.getElementById('editPregnancyType').value,
+
+        // F. BASELINE ANTHROPOMETRY
+        height: parseFloat(document.getElementById('editHeight').value),
+        weight: parseFloat(document.getElementById('editWeight').value),
+        bmi: parseFloat(document.getElementById('editBmi').value),
+        muac: parseFloat(document.getElementById('editMuac').value) || 0
+    };
+    
+    try {
+        const response = await fetch(`${API_BASE_URL}/patients/${patientId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(patientData)
+        });
+        
+        const data = await response.json();
+        if (data.success) {
+            alert("Patient information updated successfully!");
+            await loadPatientProfile(patientId);
+        } else {
+            alert('Error: ' + data.error);
+        }
+    } catch(error) {
+        console.error(error);
+        alert('Error updating patient information: ' + error.message);
+    }
+});
+</script>
+
+</body>
+</html>

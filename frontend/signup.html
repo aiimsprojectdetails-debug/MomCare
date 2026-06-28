@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mom's Care - Sign Up</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page-wrapper">
+
+    <div class="auth-container fade-in-up">
+        <div class="row g-0">
+            <!-- Left Branding Panel -->
+            <div class="col-md-4">
+                <div class="auth-left-panel">
+                    <div class="auth-left-brand">
+                        <i class="fa-solid fa-heart-pulse"></i> Mom's<span> Care</span>
+                    </div>
+                    <h2 class="auth-left-title">Join Mom's Care</h2>
+                    <p class="auth-left-desc">
+                        Register as a healthcare professional to access patient dashboards, trimester reports, metrics, and manage your clinics efficiently.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Right Form Panel -->
+            <div class="col-md-8">
+                <div class="auth-right-panel">
+                    <div class="auth-right-header">
+                        <h2 class="auth-right-title">Create Provider Account</h2>
+                        <p class="auth-right-subtitle">Register as a maternal healthcare practitioner</p>
+                    </div>
+
+                    <form id="signupForm">
+                        <h6 class="fw-bold mb-4" style="color: var(--primary); font-size: 15px;">
+                            <i class="fa-solid fa-user me-2"></i>Personal Details
+                        </h6>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Full Name *</label>
+                                <div class="input-icon-group">
+                                    <i class="fa-solid fa-user"></i>
+                                    <input type="text" class="form-control" id="fullName" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Mobile Number *</label>
+                                <div class="input-icon-group">
+                                    <i class="fa-solid fa-phone"></i>
+                                    <input type="tel" class="form-control" id="mobile" maxlength="10" pattern="[0-9]{10}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Email Address *</label>
+                                <div class="input-icon-group">
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <input type="email" class="form-control" id="email" placeholder="doctor@example.com" required>
+                                </div>
+                                <div id="emailVerificationStatus" class="form-text text-muted mt-2"></div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Password *</label>
+                                <div class="input-icon-group">
+                                    <i class="fa-solid fa-lock"></i>
+                                    <input type="password" class="form-control" id="password" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Confirm Password *</label>
+                                <div class="input-icon-group">
+                                    <i class="fa-solid fa-lock"></i>
+                                    <input type="password" class="form-control" id="confirmPassword" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h6 class="fw-bold mb-4 mt-2" style="color: var(--primary); font-size: 15px;">
+                            <i class="fa-solid fa-stethoscope me-2"></i>Professional Details
+                        </h6>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Specialization *</label>
+                                <div class="input-icon-group">
+                                    <i class="fa-solid fa-user-doctor"></i>
+                                    <select class="form-select" id="specialization" required>
+                                        <option value="">Select Specialization</option>
+                                        <option value="Gynecologist">Gynecologist</option>
+                                        <option value="Obstetrician">Obstetrician</option>
+                                        <option value="General Physician">General Physician</option>
+                                        <option value="Nurse">Nurse</option>
+                                        <option value="Midwife">Midwife</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Medical Registration No. *</label>
+                                <div class="input-icon-group">
+                                    <i class="fa-solid fa-address-card"></i>
+                                    <input type="text" class="form-control" id="regNo" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Hospital/Clinic Name *</label>
+                                <div class="input-icon-group">
+                                    <i class="fa-solid fa-hospital"></i>
+                                    <input type="text" class="form-control" id="hospitalName" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">City *</label>
+                                <div class="input-icon-group">
+                                    <i class="fa-solid fa-city"></i>
+                                    <input type="text" class="form-control" id="city" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">State *</label>
+                                <div class="input-icon-group">
+                                    <i class="fa-solid fa-map-location-dot"></i>
+                                    <select class="form-select" id="state" required>
+                                        <option value="">Select State</option>
+                                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                        <option value="Assam">Assam</option>
+                                        <option value="Bihar">Bihar</option>
+                                        <option value="Chhattisgarh">Chhattisgarh</option>
+                                        <option value="Goa">Goa</option>
+                                        <option value="Gujarat">Gujarat</option>
+                                        <option value="Haryana">Haryana</option>
+                                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                        <option value="Jharkhand">Jharkhand</option>
+                                        <option value="Karnataka">Karnataka</option>
+                                        <option value="Kerala">Kerala</option>
+                                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                        <option value="Maharashtra">Maharashtra</option>
+                                        <option value="Manipur">Manipur</option>
+                                        <option value="Meghalaya">Meghalaya</option>
+                                        <option value="Mizoram">Mizoram</option>
+                                        <option value="Nagaland">Nagaland</option>
+                                        <option value="Odisha">Odisha</option>
+                                        <option value="Punjab">Punjab</option>
+                                        <option value="Rajasthan">Rajasthan</option>
+                                        <option value="Sikkim">Sikkim</option>
+                                        <option value="Tamil Nadu">Tamil Nadu</option>
+                                        <option value="Telangana">Telangana</option>
+                                        <option value="Tripura">Tripura</option>
+                                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                        <option value="Uttarakhand">Uttarakhand</option>
+                                        <option value="West Bengal">West Bengal</option>
+                                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                        <option value="Chandigarh">Chandigarh</option>
+                                        <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                                        <option value="Delhi">Delhi</option>
+                                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                        <option value="Ladakh">Ladakh</option>
+                                        <option value="Lakshadweep">Lakshadweep</option>
+                                        <option value="Puducherry">Puducherry</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    
+                        <button type="submit" class="btn btn-primary-custom w-100 py-3 mt-3">
+                            <i class="fa-solid fa-user-plus me-2"></i> Register Account
+                        </button>
+                    </form>
+
+                    <div class="text-center mt-4">
+                        <p class="mb-0 text-muted" style="font-size: 14px;">
+                            Already have an account? <a href="login.html" class="fw-bold text-decoration-none" style="color: var(--primary);">Login here</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script type="text/plain" id="old-otp-flow-disabled">
+        const API_BASE_URL = "http://localhost:5000/api/v1";
+        const signupForm = document.getElementById('signupForm');
+        const sendOtpButton = document.getElementById('sendOtpButton');
+        const verifyOtpButton = document.getElementById('verifyOtpButton');
+        const emailInput = document.getElementById('email');
+        const emailOtpInput = document.getElementById('emailOtp');
+        const statusText = document.getElementById('emailVerificationStatus');
+        const signupButton = signupForm.querySelector('button[type="submit"]');
+        let emailVerified = false;
+        let verifiedEmail = '';
+
+        function setStatus(message, type = 'muted') {
+            statusText.textContent = message;
+            statusText.className = `form-text text-${type}`;
+        }
+
+        // Send verification code via backend email service
+        sendOtpButton.addEventListener('click', async () => {
+            const email = emailInput.value.trim().toLowerCase();
+            if (!email) {
+                setStatus('Enter your email first.', 'danger');
+                return;
+            }
+
+            try {
+                sendOtpButton.disabled = true;
+                setStatus('Sending verification code...', 'muted');
+
+                const response = await fetch(`${API_BASE_URL}/auth/send-verification-otp`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                const data = await response.json();
+
+                if (!data.success) {
+                    throw new Error(data.message || 'Could not send verification code.');
+                }
+
+                const devOtpText = data.otp ? ` Development OTP: ${data.otp}` : '';
+                setStatus(`Verification code sent to ${email}.${devOtpText}`, data.mail_error ? 'warning' : 'success');
+            } catch (error) {
+                console.error('OTP send error:', error);
+                setStatus('Error sending verification code: ' + error.message, 'danger');
+            } finally {
+                sendOtpButton.disabled = false;
+            }
+        });
+
+        verifyOtpButton.addEventListener('click', async () => {
+            const email = emailInput.value.trim().toLowerCase();
+            const otp = emailOtpInput.value.trim();
+            if (!email || !otp) {
+                setStatus('Enter your email and verification code.', 'danger');
+                return;
+            }
+
+            try {
+                verifyOtpButton.disabled = true;
+                setStatus('Verifying code...', 'muted');
+
+                const response = await fetch(`${API_BASE_URL}/auth/verify-email-otp`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, otp })
+                });
+                const data = await response.json();
+
+                if (!data.success) {
+                    throw new Error(data.message || 'Invalid verification code.');
+                }
+
+                emailVerified = true;
+                verifiedEmail = email;
+                emailInput.readOnly = true;
+                emailOtpInput.readOnly = true;
+                sendOtpButton.disabled = true;
+                setStatus('Email verified successfully.', 'success');
+            } catch (error) {
+                console.error('OTP verification error:', error);
+                setStatus('Verification failed: ' + error.message, 'danger');
+            } finally {
+                verifyOtpButton.disabled = false;
+            }
+        });
+
+        signupForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value.trim();
+            const mobile = document.getElementById('mobile').value.trim();
+            const email = emailInput.value.trim().toLowerCase();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const specialization = document.getElementById('specialization').value;
+            const regNo = document.getElementById('regNo').value.trim();
+            const hospitalName = document.getElementById('hospitalName').value.trim();
+            const city = document.getElementById('city').value.trim();
+            const state = document.getElementById('state').value;
+            const address = document.getElementById('address').value.trim();
+            
+            if (!emailVerified || verifiedEmail !== email) {
+                alert('Please verify your email before registering.');
+                return;
+            }
+
+            if(password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            if(mobile.length !== 10) {
+                alert('Mobile number must be 10 digits!');
+                return;
+            }
+            
+            try {
+                signupButton.disabled = true;
+                signupButton.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin me-2"></i> Creating Account';
+
+                const response = await fetch(`${API_BASE_URL}/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        full_name: fullName,
+                        email: email,
+                        password: password,
+                        role: 'doctor',
+                        email_verified: true,
+                        mobile,
+                        specialization,
+                        medicalRegistrationNumber: regNo,
+                        hospitalName,
+                        city,
+                        state,
+                        address
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if(data.success) {
+                    alert('Registration Successful! Please login to continue.');
+                    window.location.href = 'login.html';
+                } else {
+                    throw new Error(data.message || 'Backend registration failed!');
+                }
+            } catch(error) {
+                alert('Registration failed: ' + error.message);
+                console.error(error);
+            } finally {
+                signupButton.disabled = false;
+                signupButton.innerHTML = '<i class="fa-solid fa-user-plus me-2"></i> Register Account';
+            }
+        });
+    </script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+        import { getAuth, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBztZxemIrlFhBgW2Ro0ONTUytCIr-AjPI",
+            authDomain: "mom-s-care-c1830.firebaseapp.com",
+            projectId: "mom-s-care-c1830",
+            storageBucket: "mom-s-care-c1830.firebasestorage.app",
+            messagingSenderId: "871746039147",
+            appId: "1:871746039147:web:0648216ab075a81305302e",
+            measurementId: "G-ZDJTMJDFSM"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const API_BASE_URL = "http://localhost:5000/api/v1";
+        const PENDING_SIGNUP_KEY = "momcarePendingSignup";
+
+        const signupForm = document.getElementById("signupForm");
+        const emailInput = document.getElementById("email");
+        const statusText = document.getElementById("emailVerificationStatus");
+        const signupButton = signupForm.querySelector('button[type="submit"]');
+
+        function setStatus(message, type = "muted") {
+            statusText.textContent = message;
+            statusText.className = `form-text text-${type}`;
+        }
+
+        function collectSignupData() {
+            return {
+                full_name: document.getElementById("fullName").value.trim(),
+                mobile: document.getElementById("mobile").value.trim(),
+                email: emailInput.value.trim().toLowerCase(),
+                password: document.getElementById("password").value,
+                confirmPassword: document.getElementById("confirmPassword").value,
+                role: "doctor",
+                email_verified: true,
+                specialization: document.getElementById("specialization").value,
+                medicalRegistrationNumber: document.getElementById("regNo").value.trim(),
+                hospitalName: document.getElementById("hospitalName").value.trim(),
+                city: document.getElementById("city").value.trim(),
+                state: document.getElementById("state").value,
+                address: document.getElementById("address").value.trim()
+            };
+        }
+
+        function validateSignupData(data) {
+            if (!data.full_name || !data.mobile || !data.email || !data.password || !data.confirmPassword) {
+                throw new Error("Please fill all required personal details.");
+            }
+            if (data.password !== data.confirmPassword) {
+                throw new Error("Passwords do not match.");
+            }
+            if (data.mobile.length !== 10) {
+                throw new Error("Mobile number must be 10 digits.");
+            }
+            if (!data.specialization || !data.medicalRegistrationNumber || !data.hospitalName || !data.city || !data.state) {
+                throw new Error("Please fill all required professional details.");
+            }
+        }
+
+        async function registerPendingSignup(email) {
+            const pending = JSON.parse(localStorage.getItem(PENDING_SIGNUP_KEY) || "null");
+            if (!pending || pending.email !== email.toLowerCase()) {
+                throw new Error("Saved signup form not found. Please fill the form again.");
+            }
+
+            delete pending.confirmPassword;
+            const response = await fetch(`${API_BASE_URL}/auth/register`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(pending)
+            });
+            const data = await response.json();
+            if (!data.success) {
+                throw new Error(data.message || "Backend registration failed.");
+            }
+
+            localStorage.removeItem(PENDING_SIGNUP_KEY);
+            alert("Email verified and registration successful. Please login to continue.");
+            window.location.href = "login.html";
+        }
+
+        if (isSignInWithEmailLink(auth, window.location.href)) {
+            const pending = JSON.parse(localStorage.getItem(PENDING_SIGNUP_KEY) || "null");
+            let email = pending?.email || window.localStorage.getItem("emailForSignIn");
+            if (!email) {
+                email = window.prompt("Please enter your email for confirmation:");
+            }
+
+            if (email) {
+                setStatus("Verifying your email link...", "muted");
+                try {
+                    await signInWithEmailLink(auth, email, window.location.href);
+                    await registerPendingSignup(email);
+                } catch (error) {
+                    console.error("Email link verification error:", error);
+                    setStatus("Verification link expired or invalid: " + error.message, "danger");
+                }
+            }
+        }
+
+        signupForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const signupData = collectSignupData();
+
+            try {
+                validateSignupData(signupData);
+                signupButton.disabled = true;
+                signupButton.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin me-2"></i> Sending Link';
+                setStatus("Sending verification link...", "muted");
+
+                localStorage.setItem(PENDING_SIGNUP_KEY, JSON.stringify(signupData));
+                localStorage.setItem("emailForSignIn", signupData.email);
+
+                if (window.location.protocol === "file:") {
+                    throw new Error("Firebase Email Link authentication cannot be used directly with 'file://' URLs (by double-clicking the HTML file). Please run this page on a local web server (e.g., VS Code Live Server or Flask server at http://localhost:5000) and ensure the domain is added to your Firebase Console under Authentication > Settings > Authorized Domains.");
+                }
+
+                await sendSignInLinkToEmail(auth, signupData.email, {
+                    url: window.location.href.split("?")[0],
+                    handleCodeInApp: true
+                });
+
+                setStatus(`Verification link sent to ${signupData.email}. Please check your email and click the link to complete registration.`, "success");
+                alert("Verification link sent to your email. Please check your inbox.");
+            } catch (error) {
+                console.error("Signup link error:", error);
+                setStatus("Could not send verification link: " + error.message, "danger");
+                alert("Registration failed: " + error.message);
+            } finally {
+                signupButton.disabled = false;
+                signupButton.innerHTML = '<i class="fa-solid fa-user-plus me-2"></i> Register Account';
+            }
+        });
+    </script>
+</body>
+</html>

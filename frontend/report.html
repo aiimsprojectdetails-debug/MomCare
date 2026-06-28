@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mom's Care - Delivery Reports</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-wrapper">
+    <!-- Left Navigation Sidebar -->
+    <div class="sidebar">
+        <div>
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <div class="logo-text">Mom's<span> Care</span></div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li>
+                    <a href="dashboard.html" class="nav-item">
+                        <i class="fa-solid fa-chart-simple"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="patient.html?all=true" class="nav-item">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Patients</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="hospital.html" class="nav-item">
+                        <i class="fa-solid fa-hospital"></i>
+                        <span>Hospitals</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="report.html" class="nav-item active">
+                        <i class="fa-solid fa-file-invoice"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="user-profile-widget">
+                <div class="user-widget-avatar" id="userAvatar">
+                    DP
+                </div>
+                <div class="user-widget-info">
+                    <div class="user-widget-name" id="userNameWidget">Dr. Ananya Sharma</div>
+                    <div class="user-widget-role" id="userRoleWidget">Obstetrician</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <!-- Header Bar -->
+        <div class="header-bar fade-in-up">
+            <div class="header-left">
+                <h1>All Patient Delivery Reports</h1>
+            </div>
+            <div class="header-right">
+                <span class="badge bg-light text-muted border px-3 py-2 fw-semibold" id="reportsCountLabel">Loading reports...</span>
+            </div>
+        </div>
+
+        <!-- Reports Grid/Table Wrapper -->
+        <div class="card-table-wrapper fade-in-up mt-3">
+            <div class="table-responsive">
+                <table class="table table-custom align-middle">
+                    <thead>
+                        <tr>
+                            <th>Patient Details</th>
+                            <th>Hospital</th>
+                            <th>Date of Delivery</th>
+                            <th>Mode of Delivery</th>
+                            <th>Baby Sex / Weight</th>
+                            <th>APGAR Score</th>
+                            <th>NICU Admission</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reportsTableBody">
+                        <tr>
+                            <td colspan="7" class="text-center py-5 text-muted">
+                                <i class="fa-solid fa-circle-notch fa-spin me-2" style="color: var(--primary); font-size: 24px;"></i> Fetching delivery reports...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const API_BASE_URL = "http://localhost:5000/api/v1";
+
+document.addEventListener("DOMContentLoaded", async () => {
+    const user = localStorage.getItem('user');
+    if (user) {
+        const userData = JSON.parse(user);
+        document.getElementById('userNameWidget').textContent = userData.full_name || 'Doctor';
+        const initials = userData.full_name ? userData.full_name.substring(0, 2).toUpperCase() : 'DR';
+        document.getElementById('userAvatar').textContent = initials;
+    }
+    
+    await loadDeliveryReports();
+});
+
+async function loadDeliveryReports() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/delivery`);
+        const data = await response.json();
+        
+        const tableBody = document.getElementById('reportsTableBody');
+        
+        if (data.success && data.deliveries && data.deliveries.length > 0) {
+            tableBody.innerHTML = '';
+            document.getElementById('reportsCountLabel').textContent = `${data.deliveries.length} delivery reports`;
+            
+            data.deliveries.forEach(record => {
+                const deliveryDate = record.delivery_date ? new Date(record.delivery_date).toLocaleDateString() : 'N/A';
+                
+                // Parse APGAR score alert class
+                let apgarClass = 'bg-success';
+                const apgar = parseInt(record.apgar_score);
+                if (apgar < 4) apgarClass = 'bg-danger';
+                else if (apgar < 7) apgarClass = 'bg-warning';
+                
+                // Parse NICU alert class
+                const nicuText = record.nicu_admission || 'No';
+                const nicuClass = nicuText.toLowerCase() === 'yes' ? 'bg-danger' : 'bg-light text-muted border';
+                
+                tableBody.innerHTML += `
+                    <tr>
+                        <td>
+                            <div class="fw-bold text-slate-800">${record.patient_name}</div>
+                            <small class="text-muted">GA: ${record.gestational_age_delivery || 'N/A'} weeks</small>
+                        </td>
+                        <td>
+                            <span class="badge bg-light text-slate-700 border">${record.hospital_name}</span>
+                        </td>
+                        <td>
+                            <i class="fa-regular fa-calendar-days me-1 text-slate-400"></i> ${deliveryDate}
+                        </td>
+                        <td>
+                            <span class="text-slate-800 fw-semibold">${record.mode_of_delivery || 'N/A'}</span>
+                        </td>
+                        <td>
+                            <div class="fw-bold">${record.baby_gender || 'N/A'}</div>
+                            <small class="text-muted">${record.birth_weight || 'N/A'} kg</small>
+                        </td>
+                        <td>
+                            <span class="badge ${apgarClass}">${record.apgar_score || 'N/A'}/10</span>
+                        </td>
+                        <td>
+                            <span class="badge ${nicuClass}">${nicuText}</span>
+                            ${record.nicu_reason ? `<div class="small text-muted mt-1" style="font-size: 10px; max-width: 150px;">Reason: ${record.nicu_reason}</div>` : ''}
+                        </td>
+                    </tr>
+                `;
+            });
+        } else {
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="7" class="text-center py-5 text-muted">
+                        <i class="fa-solid fa-inbox mb-3" style="font-size: 36px; color: var(--slate-300);"></i>
+                        <p class="mb-0 fw-semibold">No delivery records found.</p>
+                        <p class="small text-slate-400">Delivery reports will be displayed once recorded from a patient profile.</p>
+                    </td>
+                </tr>`;
+            document.getElementById('reportsCountLabel').textContent = '0 delivery reports';
+        }
+    } catch (error) {
+        console.error(error);
+        document.getElementById('reportsTableBody').innerHTML = `
+            <tr>
+                <td colspan="7" class="text-center py-5 text-danger">
+                    <i class="fa-solid fa-triangle-exclamation mb-3" style="font-size: 36px;"></i>
+                    <p class="mb-0 fw-semibold">Failed to load delivery reports</p>
+                    <p class="small text-danger">${error.message}</p>
+                </td>
+            </tr>`;
+        document.getElementById('reportsCountLabel').textContent = 'Error';
+    }
+}
+</script>
+</body>
+</html>

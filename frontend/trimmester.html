@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mom's Care - Trimester Monitoring</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-wrapper">
+    <!-- Left Navigation Sidebar -->
+    <div class="sidebar">
+        <div>
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <div class="logo-text">Mom's<span> Care</span></div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li>
+                    <a href="dashboard.html" class="nav-item">
+                        <i class="fa-solid fa-chart-simple"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="patient.html?all=true" class="nav-item active">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Patients</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="hospital.html" class="nav-item">
+                        <i class="fa-solid fa-hospital"></i>
+                        <span>Hospitals</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="report.html" class="nav-item">
+                        <i class="fa-solid fa-file-invoice"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="user-profile-widget">
+                <div class="user-widget-avatar" id="userAvatar">
+                    DP
+                </div>
+                <div class="user-widget-info">
+                    <div class="user-widget-name" id="userNameWidget">Dr. Ananya Sharma</div>
+                    <div class="user-widget-role" id="userRoleWidget">Obstetrician</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <!-- Header Bar -->
+        <div class="header-bar fade-in-up">
+            <div class="header-left" style="display: flex; align-items: center; gap: 16px;">
+                <a href="profile.html" class="btn btn-secondary-custom" style="padding: 8px 14px;">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Profile
+                </a>
+                <h1 style="margin: 0;">Trimester Monitoring</h1>
+            </div>
+            <div class="header-right">
+                <span class="badge bg-light text-muted border px-3 py-2 fw-semibold" id="gestationalLabel">Pregnancy Track</span>
+            </div>
+        </div>
+
+        <!-- Layout Grid -->
+        <div class="row fade-in-up">
+            <!-- Left overview column -->
+            <div class="col-lg-4 mb-4">
+                <div class="profile-card text-center mb-4">
+                    <div class="profile-avatar-big" id="patientAvatarBig">
+                        ?
+                    </div>
+                    <h4 class="fw-bold text-slate-900 mb-1" id="patientNameTitle">Select Patient</h4>
+                    <p class="small text-muted mb-3" id="patientAadhaarTitle"><i class="fa-solid fa-id-card me-2"></i>Aadhaar: N/A</p>
+                    
+                    <span class="badge-custom badge-normal mb-4" id="patientRiskBadge">Not Loaded</span>
+                    
+                    <hr class="my-3" style="border-color: var(--slate-200);">
+
+                    <div class="text-start d-flex flex-column gap-2 mt-3">
+                        <a href="profile.html" class="nav-link nav-item" style="padding: 12px 18px; border-radius: var(--border-radius-md); transform: none;">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <span>Basic Information</span>
+                        </a>
+                        <a href="trimmester.html?trim=1" class="nav-link nav-item" id="trim1Link" style="padding: 12px 18px; border-radius: var(--border-radius-md); transform: none;">
+                            <i class="fa-solid fa-1"></i>
+                            <span>1st Trimester Monitoring</span>
+                        </a>
+                        <a href="trimmester.html?trim=2" class="nav-link nav-item" id="trim2Link" style="padding: 12px 18px; border-radius: var(--border-radius-md); transform: none;">
+                            <i class="fa-solid fa-2"></i>
+                            <span>2nd Trimester Monitoring</span>
+                        </a>
+                        <a href="trimmester.html?trim=3" class="nav-link nav-item" id="trim3Link" style="padding: 12px 18px; border-radius: var(--border-radius-md); transform: none;">
+                            <i class="fa-solid fa-3"></i>
+                            <span>3rd Trimester Monitoring</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right timeline/visits column -->
+            <div class="col-lg-8">
+                <!-- Stepper Progress Timeline -->
+                <div class="card p-4 mb-4">
+                    <div class="timeline">
+                        <div class="timeline-item" id="step1">
+                            <div class="timeline-circle" id="circle1">1</div>
+                            <span>1st Trimester</span>
+                        </div>
+                        <div class="timeline-item" id="step2">
+                            <div class="timeline-circle" id="circle2">2</div>
+                            <span>2nd Trimester</span>
+                        </div>
+                        <div class="timeline-item" id="step3">
+                            <div class="timeline-circle" id="circle3">3</div>
+                            <span>3rd Trimester</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visits Header and List Card -->
+                <div class="d-flex justify-content-between align-items-center mb-4 mt-2">
+                    <h2 class="fw-bold text-slate-900 mb-0" id="trimesterTitle" style="font-size: 22px;">1st Trimester Clinical Visits</h2>
+                    <button class="btn btn-accent-custom" id="addVisitBtn" data-bs-toggle="modal" data-bs-target="#visitModal">
+                        <i class="fa-solid fa-folder-plus"></i> Add Clinical Visit
+                    </button>
+                </div>
+
+                <!-- Visits Container -->
+                <div id="visitContainer" class="mb-4">
+                    <!-- Cards will be populated dynamically -->
+                </div>
+
+                <!-- Stepper Navigation Buttons -->
+                <div class="d-flex justify-content-between mt-4">
+                    <button class="btn btn-secondary-custom" id="prevBtn">
+                        <i class="fa-solid fa-chevron-left"></i> Previous Trimester
+                    </button>
+                    <button class="btn btn-secondary-custom" id="nextBtn">
+                        Next Trimester <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Visit Modal -->
+<div class="modal fade" id="visitModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fa-solid fa-notes-medical me-2" style="color: var(--primary);"></i>Record Prenatal Visit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" style="max-height: 75vh; overflow-y: auto; font-size: 12px;">
+                <form id="visitForm">
+                    <!-- VISIT BASICS -->
+                    <div class="mb-2">
+                        <label class="form-label">Visit Date *</label>
+                        <input type="date" id="visitDate" class="form-control" required style="font-size: 12px;">
+                    </div>
+
+                    <!-- DIET -->
+                    <h6 style="color: var(--primary); font-size: 12px; font-weight: 700; margin-top: 10px;"><i class="fa-solid fa-apple me-1"></i>DIET (Previous Day)</h6>
+                    <div class="row">
+                        <div class="col-6 mb-2"><label style="font-size: 11px;">Breakfast</label><input type="text" id="breakfast" class="form-control" style="font-size: 11px;"></div>
+                        <div class="col-6 mb-2"><label style="font-size: 11px;">Mid-morning</label><input type="text" id="midSnack" class="form-control" style="font-size: 11px;"></div>
+                        <div class="col-6 mb-2"><label style="font-size: 11px;">Lunch</label><input type="text" id="lunch" class="form-control" style="font-size: 11px;"></div>
+                        <div class="col-6 mb-2"><label style="font-size: 11px;">Evening Snack</label><input type="text" id="eveningSnack" class="form-control" style="font-size: 11px;"></div>
+                        <div class="col-6 mb-2"><label style="font-size: 11px;">Dinner</label><input type="text" id="dinner" class="form-control" style="font-size: 11px;"></div>
+                        <div class="col-6 mb-2"><label style="font-size: 11px;">Folic Acid *</label><select id="folicAcid" class="form-select" required style="font-size: 11px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                        <div class="col-6 mb-2"><label style="font-size: 11px;">Iron Tablets *</label><select id="ironTablets" class="form-select" required style="font-size: 11px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                        <div class="col-6 mb-2"><label style="font-size: 11px;">Milk (cups)</label><input type="number" id="milk" min="0" class="form-control" style="font-size: 11px;"></div>
+                        <div class="col-6 mb-2"><label style="font-size: 11px;">Fruits (servings)</label><input type="number" id="fruits" min="0" class="form-control" style="font-size: 11px;"></div>
+                        <div class="col-6 mb-2"><label style="font-size: 11px;">Water (L)</label><input type="number" id="water" step="0.5" class="form-control" style="font-size: 11px;"></div>
+                    </div>
+
+                    <!-- MATERNAL ASSESSMENT -->
+                    <h6 style="color: var(--primary); font-size: 12px; font-weight: 700; margin-top: 10px;"><i class="fa-solid fa-heart-pulse me-1"></i>MATERNAL ASSESSMENT</h6>
+                    <div class="row">
+                        <div class="col-6 mb-2"><label style="font-size: 11px;">Weight (kg) *</label><input type="number" id="weight" step="0.1" class="form-control" required style="font-size: 11px;"></div>
+                        <div class="col-6 mb-2"><label style="font-size: 11px;">BP (mmHg) *</label><input type="text" id="bp" placeholder="120/80" class="form-control" required style="font-size: 11px;"></div>
+                        <div class="col-6 mb-2"><label style="font-size: 11px;">MUAC (cm)</label><input type="number" id="muac" step="0.1" class="form-control" style="font-size: 11px;"></div>
+                        <div class="col-6 mb-2"><label style="font-size: 11px;">Pallor *</label><select id="pallor" class="form-select" required style="font-size: 11px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                        <div class="col-6 mb-2"><label style="font-size: 11px;">Edema *</label><select id="edema" class="form-select" required style="font-size: 11px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                        <div class="col-6 mb-2"><label style="font-size: 11px;">Hemoglobin (g/dL)</label><input type="number" id="hemoglobin" step="0.1" class="form-control" style="font-size: 11px;"></div>
+                        <div class="col-6 mb-2"><label style="font-size: 11px;">Blood Sugar (mg/dL)</label><input type="number" id="bloodSugar" class="form-control" style="font-size: 11px;"></div>
+                        <div class="col-6 mb-2"><label style="font-size: 11px;">Nausea/Vomiting</label><select id="nausea" class="form-select" style="font-size: 11px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                    </div>
+
+                    <!-- T1 SPECIFIC -->
+                    <div id="t1Form" class="d-none">
+                        <h6 style="color: var(--primary); font-size: 12px; font-weight: 700; margin-top: 10px;">PREGNANCY ASSESSMENT (T1)</h6>
+                        <div class="row">
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">Gestational Age (wks)</label><input type="number" id="gestAge" class="form-control" style="font-size: 11px;"></div>
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">Vaginal Bleeding</label><select id="bleeding" class="form-select" style="font-size: 11px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                            <div class="col-12 mb-2"><label style="font-size: 11px;">Any Illness</label><input type="text" id="illness" class="form-control" style="font-size: 11px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- T2 & T3 OBSTETRIC -->
+                    <div id="t2t3Form" class="d-none">
+                        <h6 style="color: var(--primary); font-size: 12px; font-weight: 700; margin-top: 10px;">OBSTETRIC ASSESSMENT</h6>
+                        <div class="row">
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">Fundal Height (cm)</label><input type="number" id="fundal" step="0.1" class="form-control" style="font-size: 11px;"></div>
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">Fetal Movement *</label><select id="fetalMov" class="form-select" required style="font-size: 11px;"><option>-</option><option>Present</option><option>Reduced</option><option>Absent</option></select></div>
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">FHR (bpm)</label><input type="number" id="fhr" class="form-control" style="font-size: 11px;"></div>
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">Fetal Presentation</label><select id="presentation" class="form-select" style="font-size: 11px;"><option>-</option><option>Cephalic</option><option>Breech</option><option>Transverse</option></select></div>
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">Vaginal Bleeding</label><select id="bleedingObs" class="form-select" style="font-size: 11px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">Any Illness</label><input type="text" id="illnessObs" class="form-control" style="font-size: 11px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- T2 SPECIFIC -->
+                    <div id="t2Form" class="d-none">
+                        <h6 style="color: var(--primary); font-size: 12px; font-weight: 700; margin-top: 10px;">ULTRASOUND & COMPLICATIONS</h6>
+                        <div class="row">
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">Anomaly Scan Done?</label><select id="anomaly" class="form-select" style="font-size: 11px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">Fetal Growth Normal?</label><select id="growth" class="form-select" style="font-size: 11px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">Placenta Position</label><input type="text" id="placenta" class="form-control" style="font-size: 11px;"></div>
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">Amniotic Fluid Status</label><input type="text" id="amniotic" class="form-control" style="font-size: 11px;"></div>
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">Gestational Diabetes?</label><select id="gestDm" class="form-select" style="font-size: 11px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">Anemia?</label><select id="anemiaT2" class="form-select" style="font-size: 11px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">Hospitalization?</label><select id="hospT2" class="form-select" style="font-size: 11px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                        </div>
+                    </div>
+
+                    <!-- T3 SPECIFIC -->
+                    <div id="t3Form" class="d-none">
+                        <h6 style="color: var(--primary); font-size: 12px; font-weight: 700; margin-top: 10px;">TRIMESTER 3 SPECIFIC</h6>
+                        <div class="row">
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">Reduced Movement?</label><select id="redMov" class="form-select" style="font-size: 11px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">Swelling of Feet?</label><select id="swell" class="form-select" style="font-size: 11px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">Severe Headache?</label><select id="headache" class="form-select" style="font-size: 11px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">Blurred Vision?</label><select id="vision" class="form-select" style="font-size: 11px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">Hospital Admission?</label><select id="hospT3" class="form-select" style="font-size: 11px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">CTG Done?</label><select id="ctg" class="form-select" style="font-size: 11px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">CTG Result</label><input type="text" id="ctgResult" class="form-control" style="font-size: 11px;"></div>
+                            <div class="col-6 mb-2"><label style="font-size: 11px;">Doppler Done?</label><select id="doppler" class="form-select" style="font-size: 11px;"><option>-</option><option>Yes</option><option>No</option></select></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-2">
+                        <label style="font-size: 11px;">Remarks</label>
+                        <textarea id="remarks" class="form-control" rows="2" style="font-size: 11px;"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary-custom" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary-custom" id="saveVisitBtn">
+                    <i class="fa-solid fa-floppy-disk"></i> Save Record
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const API_BASE_URL = "http://localhost:5000/api/v1";
+const selectedPatientId = localStorage.getItem('selectedPatientId');
+const urlParams = new URLSearchParams(window.location.search);
+let currentTrimester = parseInt(urlParams.get('trim')) || 1;
+
+// Initialize
+document.addEventListener("DOMContentLoaded", async () => {
+    const userMobile = localStorage.getItem('userMobile');
+    if (userMobile) {
+        document.getElementById('userNameWidget').textContent = userMobile;
+        const initials = userMobile.substring(0, 2).toUpperCase();
+        document.getElementById('userAvatar').textContent = initials;
+    }
+    
+    // Load patient details
+    if (selectedPatientId) {
+        await loadPatientDetails();
+    }
+    
+    updateUI();
+    loadVisits();
+    setupFormTrimesterToggle();
+});
+
+function setupFormTrimesterToggle() {
+    // Show/hide trimester-specific form sections
+    const showTrimesterForm = () => {
+        // Hide all first
+        document.getElementById('t1Form').classList.add('d-none');
+        document.getElementById('t2t3Form').classList.add('d-none');
+        document.getElementById('t2Form').classList.add('d-none');
+        document.getElementById('t3Form').classList.add('d-none');
+
+        // Show based on current trimester
+        if (currentTrimester === 1) {
+            document.getElementById('t1Form').classList.remove('d-none');
+        } else if (currentTrimester === 2) {
+            document.getElementById('t2t3Form').classList.remove('d-none');
+            document.getElementById('t2Form').classList.remove('d-none');
+        } else if (currentTrimester === 3) {
+            document.getElementById('t2t3Form').classList.remove('d-none');
+            document.getElementById('t3Form').classList.remove('d-none');
+        }
+    };
+
+    // Show form when modal opens
+    const visitModal = document.getElementById('visitModal');
+    visitModal.addEventListener('show.bs.modal', showTrimesterForm);
+}
+
+async function loadPatientDetails() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/patients/${selectedPatientId}`);
+        const data = await response.json();
+        
+        if (data.success) {
+            const patient = data.data;
+            document.getElementById('patientNameTitle').textContent = patient.name;
+            document.getElementById('patientAadhaarTitle').innerHTML = `<i class="fa-solid fa-id-card me-2"></i>Aadhaar: ${formatAadhaar(patient.aadhaar)}`;
+            document.getElementById('patientAvatarBig').textContent = patient.name[0].toUpperCase();
+            document.getElementById('gestationalLabel').textContent = `Trimester: ${patient.trimester || currentTrimester}`;
+        }
+    } catch(error) {
+        alert('Error loading patient details: ' + error.message);
+        console.error(error);
+    }
+}
+
+function formatAadhaar(str) {
+    if (!str) return 'N/A';
+    return str.replace(/(\d{4})(\d{4})(\d{4})/, '$1 $2 $3');
+}
+
+function updateUI() {
+    document.getElementById('trimesterTitle').textContent = currentTrimester + 'st Trimester Clinical Visits';
+    
+    if(currentTrimester === 2) {
+        document.getElementById('trimesterTitle').textContent = '2nd Trimester Clinical Visits';
+    } else if(currentTrimester === 3) {
+        document.getElementById('trimesterTitle').textContent = '3rd Trimester Clinical Visits';
+    }
+
+    // Update stepper classes
+    for (let i = 1; i <= 3; i++) {
+        const circle = document.getElementById('circle' + i);
+        if (i < currentTrimester) {
+            circle.className = 'timeline-circle completed';
+            circle.innerHTML = '<i class="fa-solid fa-check"></i>';
+        } else if (i === currentTrimester) {
+            circle.className = 'timeline-circle active';
+            circle.textContent = i;
+        } else {
+            circle.className = 'timeline-circle';
+            circle.textContent = i;
+        }
+    }
+
+    // Update active nav links
+    document.getElementById('trim1Link').classList.remove('active');
+    document.getElementById('trim2Link').classList.remove('active');
+    document.getElementById('trim3Link').classList.remove('active');
+    document.getElementById('trim' + currentTrimester + 'Link').classList.add('active');
+
+    document.getElementById('prevBtn').disabled = currentTrimester === 1;
+    document.getElementById('nextBtn').disabled = currentTrimester === 3;
+
+    loadVisits();
+}
+
+function loadVisits() {
+    // Load visits from backend API instead of localStorage
+    loadVisitsFromBackend();
+}
+
+async function loadVisitsFromBackend() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/patients/${selectedPatientId}/visits`);
+        const data = await response.json();
+        
+        if (!data.success) {
+            throw new Error(data.message || 'Failed to load visits');
+        }
+        
+        // Filter visits by current trimester
+        const visits = data.visits.filter(visit => visit.trimester === currentTrimester);
+        
+        const container = document.getElementById('visitContainer');
+        
+        if(visits.length === 0) {
+            container.innerHTML = `
+                <div class="text-center text-muted py-5 bg-white border border-dashed rounded-3" style="border-radius: var(--border-radius-lg);">
+                    <i class="fa-solid fa-hospital-user mb-3" style="font-size: 36px; color: var(--slate-300);"></i>
+                    <p class="mb-0 fw-semibold">No prenatal visits recorded for this trimester.</p>
+                    <p class="small text-slate-400">Click the button above to log patient vitals.</p>
+                </div>`;
+            return;
+        }
+
+        container.innerHTML = '';
+        visits.forEach((visit, index) => {
+            // Parse BP for warning
+            let bpAlert = '';
+            if (visit.blood_pressure) {
+                const parts = visit.blood_pressure.split('/');
+                const sys = parseInt(parts[0]);
+                const dia = parseInt(parts[1]);
+                if (sys >= 140 || dia >= 90) {
+                    bpAlert = `<span class="alert-tag alert-danger-tag ms-2"><i class="fa-solid fa-heart-crack"></i> Hypertension Alert</span>`;
+                } else if (sys >= 130 || dia >= 80) {
+                    bpAlert = `<span class="alert-tag alert-warning-tag ms-2"><i class="fa-solid fa-triangle-exclamation"></i> Prehypertension</span>`;
+                } else {
+                    bpAlert = `<span class="alert-tag alert-success-tag ms-2"><i class="fa-solid fa-circle-check"></i> BP Normal</span>`;
+                }
+            }
+
+            // Parse Hemoglobin for warning
+            let hemoAlert = '';
+            const hb = parseFloat(visit.hemoglobin);
+            if (!isNaN(hb)) {
+                if (hb < 11.0) {
+                    hemoAlert = `<span class="alert-tag alert-danger-tag ms-2"><i class="fa-solid fa-droplet"></i> Anemia Alert (<11)</span>`;
+                } else {
+                    hemoAlert = `<span class="alert-tag alert-success-tag ms-2"><i class="fa-solid fa-circle-check"></i> Hb Normal</span>`;
+                }
+            }
+
+            // Format visit date
+            const visitDate = visit.visit_date ? new Date(visit.visit_date).toLocaleDateString() : 'N/A';
+
+            // Build visit card with comprehensive data
+            let visitDetails = `
+                <div class="visit-card">
+                    <div class="visit-card-header">
+                        <div class="visit-title">
+                            <i class="fa-solid fa-stethoscope text-teal" style="color: var(--primary);"></i> Visit #${index + 1}
+                        </div>
+                        <div class="visit-date">
+                            <i class="fa-regular fa-calendar-days me-1"></i> ${visitDate}
+                        </div>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="visit-metric">
+                                <span class="visit-metric-label">Weight Tracker</span>
+                                <span class="visit-metric-value"><i class="fa-solid fa-weight-scale text-slate-400" style="font-size:14px;"></i> ${visit.weight || 'N/A'} kg</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="visit-metric">
+                                <span class="visit-metric-label">Blood Pressure</span>
+                                <span class="visit-metric-value"><i class="fa-solid fa-heart-pulse text-slate-400" style="font-size:14px;"></i> ${visit.blood_pressure || 'N/A'} mmHg ${bpAlert}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="visit-metric">
+                                <span class="visit-metric-label">Hemoglobin (Hb)</span>
+                                <span class="visit-metric-value"><i class="fa-solid fa-droplet text-slate-400" style="font-size:14px;"></i> ${visit.hemoglobin || 'N/A'} g/dL ${hemoAlert}</span>
+                            </div>
+                        </div>
+                    </div>
+            `;
+
+            // Add diet section if present
+            if (visit.breakfast || visit.lunch || visit.water_liters || visit.milk_cups) {
+                visitDetails += `
+                    <div class="visit-section" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--slate-200); font-size: 11px;">
+                        <strong style="color: var(--primary);"><i class="fa-solid fa-apple me-1"></i>Dietary Intake</strong>
+                        <div class="row g-2 mt-1">
+                            ${visit.breakfast ? `<div class="col-6"><small>Breakfast: ${visit.breakfast}</small></div>` : ''}
+                            ${visit.lunch ? `<div class="col-6"><small>Lunch: ${visit.lunch}</small></div>` : ''}
+                            ${visit.water_liters ? `<div class="col-6"><small>Water: ${visit.water_liters}L</small></div>` : ''}
+                            ${visit.milk_cups ? `<div class="col-6"><small>Milk: ${visit.milk_cups} cups</small></div>` : ''}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Add obstetric data if present (T2/T3)
+            if (visit.fundal_height || visit.fetal_movement || visit.fetal_heart_rate) {
+                visitDetails += `
+                    <div class="visit-section" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--slate-200); font-size: 11px;">
+                        <strong style="color: var(--primary);"><i class="fa-solid fa-heart-pulse me-1"></i>Obstetric Assessment</strong>
+                        <div class="row g-2 mt-1">
+                            ${visit.fundal_height ? `<div class="col-6"><small>Fundal Height: ${visit.fundal_height} cm</small></div>` : ''}
+                            ${visit.fetal_movement ? `<div class="col-6"><small>Fetal Movement: ${visit.fetal_movement}</small></div>` : ''}
+                            ${visit.fetal_heart_rate ? `<div class="col-6"><small>FHR: ${visit.fetal_heart_rate} bpm</small></div>` : ''}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Add T3 specific if present
+            if (currentTrimester === 3 && (visit.reduced_movement || visit.severe_headache || visit.ctg_done)) {
+                visitDetails += `
+                    <div class="visit-section" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--slate-200); font-size: 11px;">
+                        <strong style="color: var(--primary);">T3 Specific Findings</strong>
+                        <div class="row g-2 mt-1">
+                            ${visit.reduced_movement ? `<div class="col-6"><small>Reduced Movement: ${visit.reduced_movement}</small></div>` : ''}
+                            ${visit.severe_headache ? `<div class="col-6"><small>Severe Headache: ${visit.severe_headache}</small></div>` : ''}
+                            ${visit.ctg_done ? `<div class="col-6"><small>CTG Done: ${visit.ctg_done}</small></div>` : ''}
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (visit.notes) {
+                visitDetails += `
+                    <div class="visit-remarks" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--slate-200);">
+                        <strong class="text-slate-800" style="font-size: 11px;"><i class="fa-regular fa-comment-dots me-1"></i>Clinical Remarks:</strong>
+                        <p class="mb-0 mt-1" style="font-size: 11px;">${visit.notes}</p>
+                    </div>
+                `;
+            }
+
+            visitDetails += `</div>`;
+            container.innerHTML += visitDetails;
+        });
+    } catch (error) {
+        console.error('Error loading visits:', error);
+        document.getElementById('visitContainer').innerHTML = `
+            <div class="alert alert-danger">Error loading visits: ${error.message}</div>
+        `;
+    }
+}
+
+document.getElementById('saveVisitBtn').addEventListener('click', () => {
+    const form = document.getElementById('visitForm');
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+
+    // Collect all field values
+    const visitData = {
+        // Visit basics
+        visitDate: document.getElementById('visitDate').value,
+
+        // Diet section
+        breakfast: document.getElementById('breakfast').value,
+        midSnack: document.getElementById('midSnack').value,
+        lunch: document.getElementById('lunch').value,
+        eveningSnack: document.getElementById('eveningSnack').value,
+        dinner: document.getElementById('dinner').value,
+        milk: document.getElementById('milk').value,
+        fruits: document.getElementById('fruits').value,
+        water: document.getElementById('water').value,
+        folicAcid: document.getElementById('folicAcid').value,
+        ironTablets: document.getElementById('ironTablets').value,
+
+        // Maternal assessment
+        weight: document.getElementById('weight').value,
+        bp: document.getElementById('bp').value,
+        muac: document.getElementById('muac').value,
+        pallor: document.getElementById('pallor').value,
+        edema: document.getElementById('edema').value,
+        hemoglobin: document.getElementById('hemoglobin').value,
+        bloodSugar: document.getElementById('bloodSugar').value,
+        nausea: document.getElementById('nausea').value,
+
+        // T1 specific
+        gestAge: document.getElementById('gestAge').value,
+        bleeding: document.getElementById('bleeding').value,
+        illness: document.getElementById('illness').value,
+
+        // T2/T3 obstetric
+        fundal: document.getElementById('fundal').value,
+        fetalMov: document.getElementById('fetalMov').value,
+        fhr: document.getElementById('fhr').value,
+        presentation: document.getElementById('presentation').value,
+        bleedingObs: document.getElementById('bleedingObs').value,
+        illnessObs: document.getElementById('illnessObs').value,
+
+        // T2 specific
+        anomaly: document.getElementById('anomaly').value,
+        growth: document.getElementById('growth').value,
+        placenta: document.getElementById('placenta').value,
+        amniotic: document.getElementById('amniotic').value,
+        gestDm: document.getElementById('gestDm').value,
+        anemiaT2: document.getElementById('anemiaT2').value,
+        hospT2: document.getElementById('hospT2').value,
+
+        // T3 specific
+        redMov: document.getElementById('redMov').value,
+        swell: document.getElementById('swell').value,
+        headache: document.getElementById('headache').value,
+        vision: document.getElementById('vision').value,
+        hospT3: document.getElementById('hospT3').value,
+        ctg: document.getElementById('ctg').value,
+        ctgResult: document.getElementById('ctgResult').value,
+        doppler: document.getElementById('doppler').value,
+
+        // Remarks
+        remarks: document.getElementById('remarks').value
+    };
+
+    if(visitData.visitDate && visitData.weight && visitData.bp) {
+        // Save to backend API instead of localStorage
+        saveVisitToBackend(visitData);
+    } else {
+        alert('Please fill in Date, Weight, and BP fields');
+    }
+});
+
+async function saveVisitToBackend(visitData) {
+    // Check if patient ID exists
+    if (!selectedPatientId) {
+        alert('Error: No patient selected. Please go back to patient list and select a patient first.');
+        return;
+    }
+
+    try {
+        console.log('Saving visit for patient:', selectedPatientId);
+        console.log('Visit data:', visitData);
+        
+        const response = await fetch(`${API_BASE_URL}/visits`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                patient_id: selectedPatientId,
+                trimester: currentTrimester,
+                visit_date: visitData.visitDate,
+                
+                // Diet
+                breakfast: visitData.breakfast,
+                mid_snack: visitData.midSnack,
+                lunch: visitData.lunch,
+                evening_snack: visitData.eveningSnack,
+                dinner: visitData.dinner,
+                folic_acid: visitData.folicAcid,
+                iron_tablets: visitData.ironTablets,
+                milk_cups: visitData.milk,
+                fruits_servings: visitData.fruits,
+                water_liters: visitData.water,
+                
+                // Maternal assessment
+                weight: visitData.weight,
+                blood_pressure: visitData.bp,
+                muac: visitData.muac,
+                pallor: visitData.pallor,
+                edema: visitData.edema,
+                hemoglobin: visitData.hemoglobin,
+                blood_sugar: visitData.bloodSugar,
+                nausea: visitData.nausea,
+                
+                // T1 specific
+                gestational_week: visitData.gestAge,
+                bleeding: visitData.bleeding,
+                illness: visitData.illness,
+                
+                // T2/T3 obstetric
+                fundal_height: visitData.fundal,
+                fetal_movement: visitData.fetalMov,
+                fetal_heart_rate: visitData.fhr,
+                fetal_presentation: visitData.presentation,
+                bleeding_obs: visitData.bleedingObs,
+                illness_obs: visitData.illnessObs,
+                
+                // T2 specific
+                anomaly_scan: visitData.anomaly,
+                fetal_growth: visitData.growth,
+                placenta_position: visitData.placenta,
+                amniotic_fluid: visitData.amniotic,
+                gestational_diabetes: visitData.gestDm,
+                anemia_t2: visitData.anemiaT2,
+                hospitalization_t2: visitData.hospT2,
+                
+                // T3 specific
+                reduced_movement: visitData.redMov,
+                swelling: visitData.swell,
+                severe_headache: visitData.headache,
+                blurred_vision: visitData.vision,
+                hospitalization_t3: visitData.hospT3,
+                ctg_done: visitData.ctg,
+                ctg_result: visitData.ctgResult,
+                doppler_done: visitData.doppler,
+                
+                // Notes
+                notes: visitData.remarks
+            })
+        });
+
+        console.log('Response status:', response.status);
+        const data = await response.json();
+        console.log('Response data:', data);
+
+        if (data.success) {
+            alert('Visit record saved successfully!');
+            
+            // Reset form
+            document.getElementById('visitForm').reset();
+
+            // Hide modal
+            const modalEl = document.getElementById('visitModal');
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            if (modal) modal.hide();
+
+            loadVisits();
+        } else {
+            throw new Error(data.message || 'Failed to save visit');
+        }
+    } catch (error) {
+        alert('Error saving visit: ' + error.message);
+        console.error('Full error:', error);
+    }
+}
+
+document.getElementById('prevBtn').addEventListener('click', () => {
+    if(currentTrimester > 1) {
+        window.location.href = 'trimmester.html?trim=' + (currentTrimester - 1);
+    }
+});
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+    if(currentTrimester < 3) {
+        window.location.href = 'trimmester.html?trim=' + (currentTrimester + 1);
+    }
+});
+</script>
+
+</body>
+</html>

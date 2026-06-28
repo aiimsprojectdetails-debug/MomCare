@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mom's Care - Patients</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-wrapper">
+    <!-- Left Navigation Sidebar -->
+    <div class="sidebar">
+        <div>
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <div class="logo-text">Mom's<span> Care</span></div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li>
+                    <a href="dashboard.html" class="nav-item">
+                        <i class="fa-solid fa-chart-simple"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="patient.html?all=true" class="nav-item active">
+                        <i class="fa-solid fa-users"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="hospital.html" class="nav-item">
+                        <i class="fa-solid fa-hospital"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="user-profile-widget">
+                <div class="user-widget-avatar" id="userAvatar">
+                    DP
+                </div>
+                <div class="user-widget-info">
+                    <div class="user-widget-name" id="userNameWidget">Dr. Ananya Sharma</div>
+                    <div class="user-widget-role" id="userRoleWidget">Obstetrician</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <!-- Header Bar -->
+        <div class="header-bar fade-in-up">
+            <div class="header-left">
+                <h1>Patient Monitoring</h1>
+            </div>
+            <div class="header-right">
+                <button class="btn btn-primary-custom" data-bs-toggle="modal" data-bs-target="#addPatientModal">
+                    <i class="fa-solid fa-user-plus"></i> Add New Patient
+                </button>
+            </div>
+        </div>
+
+        <!-- Search Bar and Filter Section -->
+        <div class="card p-3 mb-4 fade-in-up">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="search-box-container">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input 
+                            type="text" 
+                            class="search-input w-100" 
+                            id="searchAadhaar" 
+                            placeholder="Search patients by Aadhaar number..."
+                        >
+                    </div>
+                </div>
+                <div class="col-md-6 text-end mt-2 mt-md-0">
+                    <span class="small text-muted fw-semibold" id="patientCountLabel">Showing 3 patients</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Patients Table Card -->
+        <div class="card-table-wrapper fade-in-up">
+            <div class="table-responsive">
+                <table class="table table-custom align-middle">
+                    <thead>
+                        <tr>
+                            <th>Patient Name</th>
+                            <th>Aadhaar Number</th>
+                            <th>Age</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="patientsTableBody">
+                        <!-- Patient rows will load from backend -->
+                        <tr>
+                            <td colspan="4" class="text-center py-4 text-muted">
+                                <i class="fa-solid fa-circle-notch fa-spin me-2" style="color: var(--primary);"></i> No patients to display
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Patient Modal -->
+<div class="modal fade" id="addPatientModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fa-solid fa-person-breastfeeding me-2" style="color: var(--primary);"></i>Add New Patient Record</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" style="max-height: 70vh; overflow-y: auto; padding: 24px;">
+                <form id="patientForm">
+                    <!-- SECTION A: IDENTIFICATION -->
+                    <h6 class="text-teal-700 fw-bold mb-4" style="color: var(--primary); font-size: 14px; letter-spacing: 0.5px;"><i class="fa-solid fa-id-card me-2"></i>A. Identification</h6>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label" style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Aadhaar No. *</label>
+                            <input type="text" class="form-control" id="aadhaar" placeholder="12-digit Aadhaar" maxlength="12" pattern="[0-9]{12}" required style="font-size: 13px;">
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label" style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Registration Date *</label>
+                            <input type="date" class="form-control" id="registrationDate" required style="font-size: 13px;">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label" style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Name *</label>
+                            <input type="text" class="form-control" id="patientName" placeholder="Patient's Full Name" required style="font-size: 13px;">
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label" style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Age (years) *</label>
+                            <input type="number" class="form-control" id="age" placeholder="Age" min="15" max="50" required style="font-size: 13px;">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label" style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Mobile Number *</label>
+                            <input type="tel" class="form-control" id="mobile" placeholder="10-digit number" maxlength="10" pattern="[0-9]{10}" required style="font-size: 13px;">
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label" style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Village/Address *</label>
+                            <input type="text" class="form-control" id="address" placeholder="Village/Address" required style="font-size: 13px;">
+                        </div>
+                    </div>
+
+                    <hr class="my-4" style="border-color: var(--slate-200);">
+
+                    <!-- SECTION B: SOCIO-DEMOGRAPHIC INFORMATION -->
+                    <h6 class="text-teal-700 fw-bold mb-4" style="color: var(--primary); font-size: 14px; letter-spacing: 0.5px;"><i class="fa-solid fa-chart-pie me-2"></i>B. Socio-demographic Information</h6>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <label class="form-label" style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Education *</label>
+                            <select class="form-select" id="education" required style="font-size: 13px;">
+                                <option value="">Select Education Level</option>
+                                <option value="Illiterate">Illiterate</option>
+                                <option value="Primary">Primary</option>
+                                <option value="Secondary">Secondary</option>
+                                <option value="Higher Secondary">Higher Secondary</option>
+                                <option value="Graduate">Graduate</option>
+                                <option value="Post Graduate">Post Graduate</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label class="form-label" style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Occupation *</label>
+                            <select class="form-select" id="occupation" required style="font-size: 13px;">
+                                <option value="">Select Occupation</option>
+                                <option value="Housewife">Housewife</option>
+                                <option value="Farmer">Farmer</option>
+                                <option value="Laborer">Laborer</option>
+                                <option value="Service">Service</option>
+                                <option value="Business">Business</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label class="form-label" style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Family Type *</label>
+                            <select class="form-select" id="familyType" required style="font-size: 13px;">
+                                <option value="">Select Type</option>
+                                <option value="Nuclear">Nuclear</option>
+                                <option value="Joint">Joint</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <hr class="my-4" style="border-color: var(--slate-200);">
+
+                    <!-- SECTION C: OBSTETRIC HISTORY -->
+                    <h6 class="text-teal-700 fw-bold mb-4" style="color: var(--primary); font-size: 14px; letter-spacing: 0.5px;"><i class="fa-solid fa-baby-carriage me-2"></i>C. Obstetric History</h6>
+                    
+                    <div class="row">
+                        <div class="col-6 col-md-2 mb-4">
+                            <label class="form-label" style="font-size: 12px; font-weight: 600; margin-bottom: 8px;">Gravida *</label>
+                            <input type="number" class="form-control" id="gravida" min="0" placeholder="0" required style="font-size: 13px;">
+                        </div>
+                        <div class="col-6 col-md-2 mb-4">
+                            <label class="form-label" style="font-size: 12px; font-weight: 600; margin-bottom: 8px;">Para *</label>
+                            <input type="number" class="form-control" id="para" min="0" placeholder="0" required style="font-size: 13px;">
+                        </div>
+                        <div class="col-6 col-md-2 mb-4">
+                            <label class="form-label" style="font-size: 12px; font-weight: 600; margin-bottom: 8px;">Previous Abortions</label>
+                            <input type="number" class="form-control" id="abortions" min="0" placeholder="0" style="font-size: 13px;">
+                        </div>
+                        <div class="col-6 col-md-2 mb-4">
+                            <label class="form-label" style="font-size: 12px; font-weight: 600; margin-bottom: 8px;">PreviousStillbirth</label>
+                            <input type="number" class="form-control" id="stillbirth" min="0" placeholder="0" style="font-size: 13px;">
+                        </div>
+                        <div class="col-6 col-md-2 mb-4">
+                            <label class="form-label" style="font-size: 12px; font-weight: 600; margin-bottom: 8px;">Previous Preterm Births</label>
+                            <input type="number" class="form-control" id="pretermBirth" min="0" placeholder="0" style="font-size: 13px;">
+                        </div>
+                        <div class="col-6 col-md-2 mb-4">
+                            <label class="form-label" style="font-size: 12px; font-weight: 600; margin-bottom: 8px;">Previous Cesarean Birth</label>
+                            <input type="number" class="form-control" id="cesarean" min="0" placeholder="0" style="font-size: 13px;">
+                        </div>
+                    </div>
+
+                    <hr class="my-4" style="border-color: var(--slate-200);">
+
+                    <!-- SECTION D: MEDICAL HISTORY -->
+                    <h6 class="text-teal-700 fw-bold mb-4" style="color: var(--primary); font-size: 14px; letter-spacing: 0.5px;"><i class="fa-solid fa-notes-medical me-2"></i>D. Medical History</h6>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <label class="form-label" style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Hypertension *</label>
+                            <select class="form-select" id="hypertension" required style="font-size: 13px;">
+                                <option value="">Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                                <option value="Unknown">Unknown</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label class="form-label" style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Diabetes *</label>
+                            <select class="form-select" id="diabetes" required style="font-size: 13px;">
+                                <option value="">Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                                <option value="Unknown">Unknown</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label class="form-label" style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Thyroid *</label>
+                            <select class="form-select" id="thyroid" required style="font-size: 13px;">
+                                <option value="">Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                                <option value="Unknown">Unknown</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label" style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Anemia History *</label>
+                            <select class="form-select" id="anemia" required style="font-size: 13px;">
+                                <option value="">Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                                <option value="Unknown">Unknown</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label" style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Other Chronic Disease</label>
+                            <input type="text" class="form-control" id="otherDisease" placeholder="Describe if any" style="font-size: 13px;">
+                        </div>
+                    </div>
+
+                    <hr class="my-4" style="border-color: var(--slate-200);">
+
+                    <!-- SECTION E: CURRENT PREGNANCY -->
+                    <h6 class="text-teal-700 fw-bold mb-4" style="color: var(--primary); font-size: 14px; letter-spacing: 0.5px;"><i class="fa-solid fa-heart-pulse me-2"></i>E. Current Pregnancy</h6>
+                    
+                    <div class="row">
+                        <div class="col-md-3 mb-4">
+                            <label class="form-label" style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">LMP *</label>
+                            <input type="date" class="form-control" id="lmp" required style="font-size: 13px;">
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <label class="form-label" style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">EDD *</label>
+                            <input type="date" class="form-control" id="edd" required style="font-size: 13px;">
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <label class="form-label" style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">GA (weeks)</label>
+                            <input type="number" class="form-control" id="gestationalAge" placeholder="Weeks" min="0" style="font-size: 13px;">
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <label class="form-label" style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Pregnancy Type *</label>
+                            <select class="form-select" id="pregnancyType" required style="font-size: 13px;">
+                                <option value="">Select</option>
+                                <option value="Singleton">Singleton</option>
+                                <option value="Twin">Twin</option>
+                                <option value="Multiple">Multiple (>2)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <hr class="my-4" style="border-color: var(--slate-200);">
+
+                    <!-- SECTION F: BASELINE ANTHROPOMETRY -->
+                    <h6 class="text-teal-700 fw-bold mb-4" style="color: var(--primary); font-size: 14px; letter-spacing: 0.5px;"><i class="fa-solid fa-ruler me-2"></i>F. Baseline Anthropometry</h6>
+                    
+                    <div class="row">
+                        <div class="col-md-3 mb-4">
+                            <label class="form-label" style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Height (cm) *</label>
+                            <input type="number" class="form-control" id="height" step="0.1" placeholder="162.5" required style="font-size: 13px;">
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <label class="form-label" style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Weight (kg) *</label>
+                            <input type="number" class="form-control" id="weight" step="0.1" placeholder="60.5" required style="font-size: 13px;">
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <label class="form-label" style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">BMI *</label>
+                            <input type="number" class="form-control" id="bmi" step="0.1" placeholder="Auto" readonly style="font-size: 13px; background-color: var(--slate-100);">
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <label class="form-label" style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">MUAC (cm)</label>
+                            <input type="number" class="form-control" id="muac" step="0.1" placeholder="28.5" style="font-size: 13px;">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary-custom" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary-custom" id="savePatient">
+                    <i class="fa-solid fa-floppy-disk"></i> Add Patient
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const API_BASE_URL = "http://localhost:5000";
+const urlParams = new URLSearchParams(window.location.search);
+const showAll = urlParams.get('all') === 'true';
+const ACTIVE_PROJECT_ID = showAll ? null : (urlParams.get('project_id') || localStorage.getItem('selectedProjectId'));
+
+// Initialize UI
+document.addEventListener("DOMContentLoaded", async () => {
+    const user = localStorage.getItem('user');
+    if (user) {
+        const userData = JSON.parse(user);
+        document.getElementById('userNameWidget').textContent = userData.full_name || 'Doctor';
+        const initials = userData.full_name ? userData.full_name.substring(0, 2).toUpperCase() : 'DR';
+        document.getElementById('userAvatar').textContent = initials;
+    }
+    
+    // Load patients from backend
+    await loadPatients();
+});
+
+async function loadPatients() {
+    try {
+        const url = ACTIVE_PROJECT_ID ? `${API_BASE_URL}/api/v1/patients?project_id=${ACTIVE_PROJECT_ID}` : `${API_BASE_URL}/api/v1/patients`;
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        if(data.success && data.patients) {
+            displayPatients(data.patients);
+            document.getElementById('patientCountLabel').textContent = `${data.patients.length} patients`;
+        }
+    } catch(error) {
+        alert('Error loading patients: ' + error.message);
+        console.error(error);
+    }
+}
+
+function displayPatients(patients) {
+    const tableBody = document.getElementById('patientsTableBody');
+    tableBody.innerHTML = '';
+    
+    patients.forEach(patient => {
+        // Initials for avatar
+        const firstLetter = patient.name ? patient.name[0].toUpperCase() : 'P';
+        
+        // Avatar colors
+        let avatarBg = 'background-color: var(--primary-light); color: var(--primary);';
+
+        const row = `
+            <tr data-aadhaar="${patient.aadhaar || ''}">
+                <td>
+                    <div class="patient-meta-cell">
+                        <div class="patient-letter-avatar" style="${avatarBg}">${firstLetter}</div>
+                        <span class="patient-meta-name">${patient.name}</span>
+                    </div>
+                </td>
+                <td><code class="text-secondary">${formatAadhaar(patient.aadhaar)}</code></td>
+                <td>${patient.age || 'N/A'} yrs</td>
+                <td>
+                    <button class="btn btn-primary-custom btn-sm py-2 px-3" onclick="viewPatient('${patient.id || patient._id}', '${patient.name || patient.patient_name}', '${patient.aadhaar}', ${patient.age || 0})">
+                        <i class="fa-solid fa-eye me-1"></i> View Profile
+                    </button>
+                </td>
+            </tr>
+        `;
+        tableBody.innerHTML += row;
+    });
+}
+
+function formatAadhaar(str) {
+    if (!str) return 'N/A';
+    // Format as 1234 5678 9012
+    return str.replace(/(\d{4})(\d{4})(\d{4})/, '$1 $2 $3');
+}
+
+function viewPatient(patientId, patientName, patientAadhaar, patientAge) {
+    // Store variables to be consumed by profile page
+    localStorage.setItem('selectedPatientId', patientId);
+    localStorage.setItem('selectedPatientName', patientName);
+    localStorage.setItem('selectedPatientAadhaar', patientAadhaar);
+    localStorage.setItem('selectedPatientAge', patientAge);
+    window.location.href = 'profile.html';
+}
+
+// Search filter
+document.getElementById('searchAadhaar').addEventListener('input', function(e) {
+    const q = e.target.value.replace(/\s+/g, '').trim().toLowerCase();
+    const rows = document.querySelectorAll('#patientsTableBody tr');
+    
+    rows.forEach(row => {
+        const aadhaar = row.getAttribute('data-aadhaar') || '';
+        const name = row.querySelector('.patient-meta-name').textContent.toLowerCase();
+        
+        if (aadhaar.includes(q) || name.includes(q)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+});
+
+document.getElementById('savePatient').addEventListener('click', async () => {
+    const form = document.getElementById('patientForm');
+    
+    if(!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+
+    // Auto-calculate BMI
+    const height = parseFloat(document.getElementById('height').value);
+    const weight = parseFloat(document.getElementById('weight').value);
+    let bmi = null;
+    if (height && weight) {
+        bmi = (weight / ((height / 100) ** 2)).toFixed(2);
+        document.getElementById('bmi').value = bmi;
+    }
+
+    const patientData = {
+        // A. Identification
+        name: document.getElementById('patientName').value,
+        aadhaar: document.getElementById('aadhaar').value,
+        registrationDate: document.getElementById('registrationDate').value,
+        age: parseInt(document.getElementById('age').value),
+        mobile: document.getElementById('mobile').value,
+        address: document.getElementById('address').value,
+        email: document.getElementById('mobile').value + '@momcare.local',
+        
+        // B. Socio-demographic
+        education: document.getElementById('education').value,
+        occupation: document.getElementById('occupation').value,
+        familyType: document.getElementById('familyType').value,
+        
+        // C. Obstetric History
+        gravida: parseInt(document.getElementById('gravida').value) || 0,
+        para: parseInt(document.getElementById('para').value) || 0,
+        abortions: parseInt(document.getElementById('abortions').value) || 0,
+        stillbirth: parseInt(document.getElementById('stillbirth').value) || 0,
+        pretermBirth: parseInt(document.getElementById('pretermBirth').value) || 0,
+        cesarean: parseInt(document.getElementById('cesarean').value) || 0,
+        
+        // D. Medical History
+        hypertension: document.getElementById('hypertension').value,
+        diabetes: document.getElementById('diabetes').value,
+        thyroid: document.getElementById('thyroid').value,
+        anemia: document.getElementById('anemia').value,
+        otherDisease: document.getElementById('otherDisease').value,
+        
+        // E. Current Pregnancy
+        lmp: document.getElementById('lmp').value,
+        edd: document.getElementById('edd').value,
+        gestationalAge: parseInt(document.getElementById('gestationalAge').value) || null,
+        pregnancyType: document.getElementById('pregnancyType').value,
+        
+        // F. Baseline Anthropometry
+        height: parseFloat(document.getElementById('height').value) || null,
+        weight: parseFloat(document.getElementById('weight').value) || null,
+        bmi: parseFloat(bmi) || null,
+        muac: parseFloat(document.getElementById('muac').value) || null
+    };
+
+    if (ACTIVE_PROJECT_ID) {
+        patientData.project_id = ACTIVE_PROJECT_ID;
+    }
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/v1/patients`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(patientData)
+        });
+
+        const data = await response.json();
+
+        if(data.success) {
+            alert('Patient added successfully!');
+            closeModal();
+            form.reset();
+            await loadPatients();
+        } else {
+            throw new Error(data.message || 'Failed to add patient');
+        }
+    } catch(error) {
+        alert('Error: ' + error.message);
+        console.error(error);
+    }
+});
+
+function closeModal() {
+    const modalEl = document.getElementById('addPatientModal');
+    const modal = bootstrap.Modal.getInstance(modalEl);
+    if(modal) modal.hide();
+}
+</script>
+
+</body>
+</html>
